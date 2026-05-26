@@ -173,9 +173,9 @@
   <div class="wrap">
     <header>
       <section class="hero">
-        <div class="eyebrow">Prompt PsyOps™ Portal</div>
-        <h1>Value-Add Content <span class="accent">Proof Portal™</span></h1>
-        <p>Walk through your topic, experience, data, research, and insight. At the end, this portal builds a clean AI LLM meta prompt you can paste into ChatGPT, Gemini, Claude, or Grok to create a post, article, or video script backed by real proof.</p>
+        <div class="eyebrow">Value-Add Content Portal</div>
+        <h1>Create Content That <span class="accent">Adds Something New</span></h1>
+        <p>Most content simply repeats what everyone else is already saying. This portal walks you through your topic, experience, data, research, and original insight so you can generate a paste-ready AI LLM meta prompt for ChatGPT, Gemini, Claude, or Grok.</p>
       </section>
       <aside class="progress-card">
         <h2>Portal Progress</h2>
@@ -187,74 +187,72 @@
 
     <main class="portal">
       <section class="page active" data-title="Start">
-        <h2>Start With The Big Idea</h2>
+        <h2>Start With The Topic</h2>
         <p class="lead">This portal is designed to stop generic AI content before it starts. You are going to feed the AI your topic, your proof, your observations, and the content format you want.</p>
-        <label for="topic">Content Topic</label>
-        <input id="topic" placeholder="Example: Why the TOP Strategy works even when your views are low" />
+        <label for="topic">Topic</label>
+        <input id="topic" placeholder="Example: Why qualified traffic matters more than viral traffic" />
         <label for="contentAngle">Main Angle</label>
-        <textarea id="contentAngle" placeholder="Example: Most beginners chase more views, but my YouTube and affiliate data shows the right traffic matters more than big traffic."></textarea>
+        <textarea id="contentAngle" placeholder="Example: Most people chase bigger numbers, but the real value is often in the quality of the audience, the evidence behind the idea, and the insight you can bring from experience."></textarea>
         <label for="audience">Target Audience</label>
-        <input id="audience" placeholder="Example: Affiliate marketers, PLR buyers, digital creators, YouTubers, side hustlers" />
+        <input id="audience" placeholder="Example: Marketers, creators, consultants, business owners, writers, coaches, side hustlers" />
         <div class="actions"><button class="secondary" onclick="resetPortal()">Reset Portal</button><button onclick="nextPage()">Next Step →</button></div>
       </section>
 
-      <section class="page" data-title="Common Advice">
-        <h2>What Everyone Already Says</h2>
-        <p class="lead">Capture the generic advice, common belief, or surface-level talking point. This gives the AI something to move beyond.</p>
-        <label for="commonAdvice">Common Advice Or Belief</label>
-        <textarea id="commonAdvice" placeholder="Example: Most affiliate marketing advice tells beginners to get more views, post more content, find better products, or chase viral videos."></textarea>
-        <label for="wrongAssumption">What Is The Flawed Assumption?</label>
-        <textarea id="wrongAssumption" placeholder="Example: The flawed assumption is that more traffic automatically equals more sales."></textarea>
+      <section class="page" data-title="Common Knowledge">
+        <h2>What Does Everyone Already Know?</h2>
+        <p class="lead">Summarize the existing information, common advice, repeated talking points, or basic explanations people can already find elsewhere.</p>
+        <label for="commonAdvice">What Everyone Already Knows About This Topic</label>
+        <textarea id="commonAdvice" placeholder="Example: Most people already know they should create useful content, use data when possible, and share practical tips."></textarea>
+        <label for="commonAdviceDisagree">What Common Advice Do You Disagree With?</label>
+        <textarea id="commonAdviceDisagree" placeholder="Example: I disagree with the idea that more content automatically creates better results."></textarea>
         <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
       </section>
 
-      <section class="page" data-title="Your Experience">
-        <h2>Add Your Experience Layer</h2>
-        <p class="lead">This is where your content becomes hard to copy. Add what you have personally seen, tested, learned, or noticed.</p>
-        <label for="experience">Personal Experience / Observations</label>
-        <textarea id="experience" placeholder="Example: Over the years, I have seen low-view videos generate real sales when the topic and offer are tightly aligned."></textarea>
-        <label for="pattern">Pattern You Have Noticed</label>
-        <textarea id="pattern" placeholder="Example: Traffic creates data. Data creates clarity. Clarity helps match the right offer to the right people."></textarea>
+      <section class="page" data-title="Experience">
+        <h2>What Do You Know From Experience?</h2>
+        <p class="lead">Add the human layer. Include personal experience, observations, lessons learned, mistakes made, wins, failures, or real-world results.</p>
+        <label for="experience">Personal Experience, Observations, Or Real-World Results</label>
+        <textarea id="experience" placeholder="Example: I have noticed that a smaller, better-aligned audience can outperform a larger but less interested audience."></textarea>
+        <label for="lessons">Lessons Learned, Mistakes, Wins, Or Failures</label>
+        <textarea id="lessons" placeholder="Example: One mistake I made early on was judging content only by surface-level metrics instead of looking at what the content actually produced."></textarea>
         <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
       </section>
 
-      <section class="page" data-title="Your Data">
-        <h2>Enter Your Proof Data</h2>
-        <p class="lead">Use your own numbers. These can come from YouTube, email, affiliate dashboards, sales pages, opt-in pages, Skool, analytics, surveys, or customer feedback.</p>
-        <div class="grid-3">
-          <div><label for="views">Views / Reach</label><input id="views" placeholder="79 views" /></div>
-          <div><label for="ctr">CTR</label><input id="ctr" placeholder="2.3%" /></div>
-          <div><label for="avgView">Avg. View Duration</label><input id="avgView" placeholder="3:49" /></div>
-        </div>
-        <div class="grid-3">
-          <div><label for="clicks">Clicks / Hops</label><input id="clicks" placeholder="20 unique hops" /></div>
-          <div><label for="sales">Sales / Conversions</label><input id="sales" placeholder="8 sales" /></div>
-          <div><label for="earnings">Earnings</label><input id="earnings" placeholder="$218.43" /></div>
-        </div>
-        <label for="extraData">Other Useful Data</label>
-        <textarea id="extraData" placeholder="Example: Published May 20, 2026. First 5 days and 2 hours. Ranked 8 of 10 by views. 40% hop conversion. $10.92 per hop."></textarea>
+      <section class="page" data-title="Data & Proof">
+        <h2>Enter Any Data That Proves Or Supports Your Point</h2>
+        <p class="lead">Add any type of data you have. This can be your own experience data, content analytics, sales data, customer feedback, survey results, test results, research data, industry statistics, case study results, or examples from credible sources.</p>
+        <label for="proofData">Your Data, Research Data, Statistics, Case Study Results, Or Examples</label>
+        <textarea id="proofData" placeholder="Example: A video with 79 views produced 20 clicks, 8 sales, and $218.43 in commissions. OR: A survey showed X. OR: A case study found Y. OR: Customer feedback repeatedly mentioned Z."></textarea>
+        <label for="dataSource">Where Did This Data Come From?</label>
+        <textarea id="dataSource" placeholder="Example: YouTube Studio, affiliate dashboard, email platform, survey, customer interviews, published research, case study, sales report, platform analytics, spreadsheet, CRM, comments, support tickets."></textarea>
+        <label for="dataMeaning">What Does The Data Suggest?</label>
+        <textarea id="dataMeaning" placeholder="Example: The data suggests the content attracted fewer people overall, but the people it attracted were highly aligned with the offer."></textarea>
         <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
       </section>
 
       <section class="page" data-title="Research">
-        <h2>Add Outside Research Or Proof</h2>
-        <p class="lead">This step is optional but powerful. Add credible research, market data, case studies, platform data, surveys, or outside examples. If you do not have outside research yet, tell the AI to suggest what kind of research would strengthen the piece.</p>
-        <label for="research">Research / Outside Evidence</label>
-        <textarea id="research" placeholder="Example: Add any studies, surveys, industry stats, platform documentation, case studies, or third-party examples that support the point."></textarea>
-        <label for="researchNeeded">Research You Want The AI To Help Find Or Suggest</label>
-        <textarea id="researchNeeded" placeholder="Example: Find supporting ideas about qualified traffic, buyer intent, YouTube evergreen discovery, or why conversion quality matters more than vanity metrics."></textarea>
+        <h2>What Research Or Outside Proof Supports The Point?</h2>
+        <p class="lead">Add research findings, statistics, studies, surveys, case studies, or credible examples. If you do not have research yet, explain what kind of research you want the AI to suggest or help you look for.</p>
+        <label for="research">Research Findings, Statistics, Studies, Surveys, Case Studies, Or Credible Examples</label>
+        <textarea id="research" placeholder="Example: Add any studies, survey results, industry stats, credible reports, case studies, expert examples, or third-party sources that support your point."></textarea>
+        <label for="researchSurprise">What Surprised You During Your Research?</label>
+        <textarea id="researchSurprise" placeholder="Example: What surprised me was that the smaller number looked weak until it was connected to the actual outcome."></textarea>
+        <label for="researchNeeded">Research You Want The AI To Suggest Or Help Strengthen</label>
+        <textarea id="researchNeeded" placeholder="Example: Suggest what research would strengthen this argument, what sources to look for, or what kind of evidence would make the content more credible."></textarea>
         <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
       </section>
 
       <section class="page" data-title="Insight">
-        <h2>Define The Value-Add Insight</h2>
-        <p class="lead">This is the contribution. Not just what the data says, but what it means.</p>
-        <label for="insight">Main Insight</label>
-        <textarea id="insight" placeholder="Example: Most beginners think their problem is not enough traffic, but often the real issue is not attracting qualified traffic that matches the offer."></textarea>
-        <label for="topConnection">How This Connects To The TOP Strategy</label>
-        <textarea id="topConnection" placeholder="Example: Traffic created the opportunity. The offer converted the opportunity. Buyers and subscribers become part of the People layer."></textarea>
-        <label for="nextStep">Practical Next Step For The Reader</label>
-        <textarea id="nextStep" placeholder="Example: Stop asking how to go viral and start asking whether your content attracts the people most likely to care about the offer."></textarea>
+        <h2>What Are You Adding That Is New?</h2>
+        <p class="lead">This is the contribution. Add your original insights, opinions, conclusions, patterns, predictions, or practical meaning based on the information.</p>
+        <label for="patterns">What Patterns Are You Noticing That Others May Have Missed?</label>
+        <textarea id="patterns" placeholder="Example: People often confuse bigger numbers with better results, but the real pattern is alignment between audience, message, proof, and action."></textarea>
+        <label for="insight">Original Insight, Opinion, Conclusion, Or Prediction</label>
+        <textarea id="insight" placeholder="Example: The future of content is not more information. It is information filtered through evidence, experience, and useful interpretation."></textarea>
+        <label for="uniqueLearning">What Would Someone Learn That They Could Not Get From Simply Asking AI?</label>
+        <textarea id="uniqueLearning" placeholder="Example: They would see a real-world example, the actual numbers behind the lesson, and the conclusion drawn from lived experience."></textarea>
+        <label for="nextStep">What Should The Reader Do Next?</label>
+        <textarea id="nextStep" placeholder="Example: Before publishing, add one piece of proof, one personal observation, and one practical conclusion to make the content more valuable."></textarea>
         <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
       </section>
 
@@ -271,6 +269,8 @@
               <option>Email to my list</option>
               <option>Community lesson</option>
               <option>Case study</option>
+              <option>Newsletter</option>
+              <option>Short-form video script</option>
             </select>
           </div>
           <div>
@@ -281,21 +281,22 @@
               <option>Direct response and persuasive</option>
               <option>Contrarian and thought-leadership driven</option>
               <option>Beginner-friendly but not insulting</option>
+              <option>Research-backed and analytical</option>
             </select>
           </div>
         </div>
         <label for="voiceNotes">Voice Notes / Brand Rules</label>
-        <textarea id="voiceNotes" placeholder="Example: Use the TOP Strategy. Keep it grounded. Avoid hype. Speak to beginners without insulting professionals. Make it feel like a real observation, not a generic AI article."></textarea>
+        <textarea id="voiceNotes" placeholder="Example: Keep it grounded. Avoid hype. Speak plainly. Do not sound like generic AI content. Use my data honestly. Make the insight clear and practical."></textarea>
         <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
       </section>
 
       <section class="page" data-title="Generate Prompt">
         <h2>Generate Your AI LLM Meta Prompt</h2>
         <p class="lead">Click the button below to create a complete meta prompt. Paste it into ChatGPT, Gemini, Claude, or Grok. You can also copy, download, or reset the portal.</p>
-        <div class="callout"><strong>Final check:</strong> The goal is not to create more content. The goal is to create content that contains proof, experience, research, and insight someone could not get from AI alone.</div>
+        <div class="callout"><strong>Final check:</strong> If someone read this, would they learn something they could not have learned from ChatGPT alone? If the answer is no, keep improving it until the answer is yes.</div>
         <div class="grid-3">
-          <div class="mini-card"><strong>1. Proof</strong><p>Your numbers show what happened.</p></div>
-          <div class="mini-card"><strong>2. Experience</strong><p>Your observations explain why it matters.</p></div>
+          <div class="mini-card"><strong>1. Experience</strong><p>Your observations make the content human.</p></div>
+          <div class="mini-card"><strong>2. Evidence</strong><p>Your data, research, or examples make it credible.</p></div>
           <div class="mini-card"><strong>3. Insight</strong><p>Your conclusion creates the value-add.</p></div>
         </div>
         <div class="actions">
@@ -317,7 +318,7 @@
       <pre id="promptOutput"></pre>
     </section>
 
-    <p class="footer-note">Value-Add Content Proof Portal™ — built for creating content that combines data, experience, research, and original insight.</p>
+    <p class="footer-note">Value-Add Content Proof Portal™ — built for creating content that combines experience, evidence, research, and original insight.</p>
   </div>
 
   <script>
@@ -357,26 +358,30 @@
     function collectData() {
       return {
         topic: field('topic'), contentAngle: field('contentAngle'), audience: field('audience'),
-        commonAdvice: field('commonAdvice'), wrongAssumption: field('wrongAssumption'),
-        experience: field('experience'), pattern: field('pattern'),
-        views: field('views'), ctr: field('ctr'), avgView: field('avgView'), clicks: field('clicks'), sales: field('sales'), earnings: field('earnings'), extraData: field('extraData'),
-        research: field('research'), researchNeeded: field('researchNeeded'),
-        insight: field('insight'), topConnection: field('topConnection'), nextStep: field('nextStep'),
+        commonAdvice: field('commonAdvice'), commonAdviceDisagree: field('commonAdviceDisagree'),
+        experience: field('experience'), lessons: field('lessons'),
+        proofData: field('proofData'), dataSource: field('dataSource'), dataMeaning: field('dataMeaning'),
+        research: field('research'), researchSurprise: field('researchSurprise'), researchNeeded: field('researchNeeded'),
+        patterns: field('patterns'), insight: field('insight'), uniqueLearning: field('uniqueLearning'), nextStep: field('nextStep'),
         format: field('format'), tone: field('tone'), voiceNotes: field('voiceNotes')
       };
     }
 
     function generatePrompt() {
       const d = collectData();
-      const prompt = `You are a senior content strategist, direct response copywriter, and evidence-based editorial assistant.
+      const prompt = `You are a senior content strategist, evidence-based writer, editorial thinker, and direct response copywriter.
 
-Your job is to create a value-add content piece that combines personal experience, real data, outside research, and original insight.
+Your job is to create a value-add content piece that combines existing information, personal experience, data, research, examples, and original insight.
+
+Most content simply repeats what everyone else is already saying.
+Your job is to add something new.
 
 Do not create generic AI content.
-Do not simply summarize common advice.
+Do not simply summarize existing information.
 Do not overstate the proof.
-Do not make income promises or imply guaranteed results.
+Do not invent data, sources, quotes, case studies, or results.
 Use the data honestly and explain what it suggests, not what it guarantees.
+If the evidence is limited, explain that it is a limited example but still useful as a pattern, observation, or starting point.
 
 CONTENT FORMAT TO CREATE:
 ${d.format || '[Choose a content format]'}
@@ -396,81 +401,99 @@ ${d.contentAngle || '[Insert main angle]'}
 TARGET AUDIENCE:
 ${d.audience || '[Insert target audience]'}
 
-WHAT EVERYONE ALREADY SAYS:
-${d.commonAdvice || '[Insert common advice]'}
+BEFORE WRITING, ANSWER THESE QUESTIONS INTERNALLY AND USE THE ANSWERS TO CREATE THE CONTENT:
+1. What does everyone already know about this topic?
+2. What do I know from personal experience that most people do not?
+3. What data, statistics, studies, examples, research, or case studies support the point?
+4. What surprised me during my research or review of the data?
+5. What common advice do I disagree with?
+6. What patterns am I noticing that others may have missed?
+7. What would someone learn from this content that they could not get from simply asking AI?
 
-FLAWED ASSUMPTION TO CHALLENGE:
-${d.wrongAssumption || '[Insert flawed assumption]'}
+WHAT EVERYONE ALREADY KNOWS:
+${d.commonAdvice || '[Insert common advice, basic information, or existing knowledge]'}
 
-PERSONAL EXPERIENCE / OBSERVATIONS:
-${d.experience || '[Insert personal experience]'}
+COMMON ADVICE I DISAGREE WITH:
+${d.commonAdviceDisagree || '[Insert common advice you disagree with]'}
 
-PATTERN NOTICED:
-${d.pattern || '[Insert pattern noticed]'}
+PERSONAL EXPERIENCE, OBSERVATIONS, OR REAL-WORLD RESULTS:
+${d.experience || '[Insert personal experience or observations]'}
 
-MY DATA / PROOF POINTS:
-- Views / Reach: ${d.views || '[Insert views or reach]'}
-- CTR: ${d.ctr || '[Insert CTR if available]'}
-- Average View Duration: ${d.avgView || '[Insert average view duration if available]'}
-- Clicks / Hops: ${d.clicks || '[Insert clicks or hops]'}
-- Sales / Conversions: ${d.sales || '[Insert sales or conversions]'}
-- Earnings / Revenue: ${d.earnings || '[Insert earnings or revenue]'}
-- Other data: ${d.extraData || '[Insert any other useful data]'}
+LESSONS LEARNED, MISTAKES, WINS, OR FAILURES:
+${d.lessons || '[Insert lessons learned, mistakes, wins, or failures]'}
 
-OUTSIDE RESEARCH / SUPPORTING EVIDENCE:
-${d.research || '[Insert outside research if available]'}
+DATA / EVIDENCE / PROOF THAT SUPPORTS THE POINT:
+${d.proofData || '[Insert any data, statistics, case study results, examples, content analytics, sales data, research data, survey data, customer feedback, or other proof]'}
 
-RESEARCH TO SUGGEST OR LOOK FOR:
-${d.researchNeeded || '[Suggest what outside research would strengthen this piece]'}
+WHERE THE DATA CAME FROM:
+${d.dataSource || '[Insert the source of the data or evidence]'}
 
-MAIN VALUE-ADD INSIGHT:
-${d.insight || '[Insert your main insight]'}
+WHAT THE DATA SUGGESTS:
+${d.dataMeaning || '[Insert what the data suggests or why it matters]'}
 
-CONNECTION TO THE TOP STRATEGY:
-${d.topConnection || '[Explain how this connects to Traffic → Offer → People]'}
+RESEARCH FINDINGS, STATISTICS, STUDIES, SURVEYS, CASE STUDIES, OR CREDIBLE EXAMPLES:
+${d.research || '[Insert outside research or credible examples if available]'}
+
+WHAT SURPRISED ME DURING THE RESEARCH OR DATA REVIEW:
+${d.researchSurprise || '[Insert what surprised you]'}
+
+RESEARCH TO SUGGEST OR HELP STRENGTHEN:
+${d.researchNeeded || '[Suggest what research would strengthen this argument, what sources to look for, or what kind of evidence would make the content more credible]'}
+
+PATTERNS I AM NOTICING THAT OTHERS MAY HAVE MISSED:
+${d.patterns || '[Insert patterns you are noticing]'}
+
+ORIGINAL INSIGHT, OPINION, CONCLUSION, OR PREDICTION:
+${d.insight || '[Insert original insight, opinion, conclusion, or prediction]'}
+
+WHAT SOMEONE WOULD LEARN THAT THEY COULD NOT GET FROM SIMPLY ASKING AI:
+${d.uniqueLearning || '[Insert the unique learning or value-add]'}
 
 PRACTICAL NEXT STEP FOR THE READER:
 ${d.nextStep || '[Insert practical next step]'}
 
-STRUCTURE THE CONTENT LIKE THIS:
+CREATE THE CONTENT USING THIS STRUCTURE:
 
 1. Hook
-Open with a direct observation, surprising contrast, or data point.
-Make the reader want to keep reading.
+Open with a direct observation, surprising contrast, useful data point, or statement that challenges the common view.
 
 2. What Everyone Says
-Briefly explain the common advice or belief.
+Summarize the common advice, existing information, or standard explanation.
 
 3. What The Data Shows
-Use my provided data clearly and honestly.
-Show the contrast between surface-level metrics and business outcomes.
+Present the research, statistics, studies, surveys, documented examples, case study results, analytics, or proof.
+Make the data easy to understand.
+Do not exaggerate what the data proves.
 
-4. What I Observed
-Bring in my personal experience and pattern recognition.
-This should sound lived-in, not academic.
+4. What I Have Observed
+Share personal experiences, lessons learned, mistakes, wins, failures, or real-world observations.
+This should sound lived-in, not generic or academic.
 
 5. What This Means
-Explain the deeper lesson.
-Tie it to the TOP Strategy where appropriate: Traffic creates opportunity, Offer converts opportunity, People create long-term business value.
+Combine the research, data, experience, and observations into a practical conclusion.
+Explain why the point matters.
 
-6. The Insight Most People Miss
-State the value-add idea in a memorable way.
+6. What To Do Next
+Give the reader a simple action step based on the findings.
 
-7. What To Do Next
-Give the reader a practical next step.
-
-8. Final Takeaway
-End with a strong, grounded conclusion.
+7. Final Check / Closing Thought
+End by reinforcing the unique value-add.
+The reader should leave with something they could not have learned from a generic AI summary.
 
 IMPORTANT WRITING RULES:
 - Use clear sentences.
 - Avoid hype.
 - Avoid fake certainty.
 - Do not invent data.
-- Do not claim the same results will happen for everyone.
-- Make the piece feel like a real business observation backed by actual evidence.
-- If the data is limited, say that it is a small example but still useful as a pattern worth noticing.
-- Make this content valuable beyond what someone could get from asking AI for a generic answer.
+- Do not invent research.
+- Do not claim the same result will happen for everyone.
+- Separate evidence from interpretation.
+- Make the piece useful, practical, and grounded.
+- Make the content valuable beyond what someone could get from asking AI for a generic answer.
+
+FINAL QUALITY CHECK BEFORE YOU FINISH:
+Ask: "If someone read this, would they learn something they could not have learned from ChatGPT alone?"
+If the answer is no, improve the piece by adding stronger experience, clearer evidence, sharper interpretation, or a more useful conclusion.
 
 Now create the finished ${d.format || 'content piece'}.`;
 
