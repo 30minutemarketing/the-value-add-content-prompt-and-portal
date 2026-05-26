@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Value-Add Content Proof Portal™</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #0d1b2e;
+      --panel2: #12243a;
+      --text: #f5f7fb;
+      --muted: #aab7c8;
+      --yellow: #ffd21f;
+      --blue: #39b6ff;
+      --green: #60d66a;
+      --orange: #ff9f1c;
+      --red: #ff5f57;
+      --border: rgba(255,255,255,.12);
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(57, 182, 255, .22), transparent 30%),
+        radial-gradient(circle at top right, rgba(255, 210, 31, .18), transparent 26%),
+        linear-gradient(145deg, #050a12, var(--bg) 45%, #02050a);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 18px 60px; }
+
+    header {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    .hero, .progress-card, .page, .output-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
+
+    .hero { padding: 30px; position: relative; overflow: hidden; }
+    .hero:after {
+      content: "";
+      position: absolute;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(255,210,31,.2), transparent 70%);
+      right: -80px; top: -80px;
+    }
+
+    .eyebrow { color: var(--yellow); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: 13px; }
+    h1 { font-size: clamp(34px, 5vw, 64px); line-height: .96; margin: 12px 0 14px; letter-spacing: -0.05em; }
+    .hero p { color: var(--muted); font-size: 18px; line-height: 1.55; max-width: 760px; margin: 0; }
+    .accent { color: var(--yellow); }
+
+    .progress-card { padding: 24px; }
+    .progress-card h2 { margin: 0 0 12px; font-size: 22px; }
+    .meter { height: 12px; background: rgba(255,255,255,.09); border-radius: 99px; overflow: hidden; margin: 16px 0 12px; }
+    .bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--blue), var(--yellow)); transition: width .25s ease; }
+    .step-list { display: grid; gap: 10px; margin-top: 18px; }
+    .step-chip { display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 14px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,.2); flex: 0 0 auto; }
+    .step-chip.active { color: var(--text); font-weight: 800; }
+    .step-chip.active .dot { background: var(--yellow); box-shadow: 0 0 0 5px rgba(255,210,31,.12); }
+    .step-chip.done .dot { background: var(--green); }
+
+    .portal { margin-top: 22px; }
+    .page { display: none; padding: 28px; }
+    .page.active { display: block; animation: fade .22s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .page h2 { font-size: clamp(26px, 3vw, 38px); margin: 0 0 10px; letter-spacing: -.03em; }
+    .page .lead { color: var(--muted); line-height: 1.6; margin: 0 0 22px; font-size: 17px; }
+    label { display: block; font-weight: 800; margin: 18px 0 8px; }
+    .hint { color: var(--muted); font-size: 13px; margin-top: 6px; line-height: 1.45; }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: rgba(4, 10, 18, .65);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 15px;
+      font: inherit;
+      outline: none;
+    }
+    textarea { min-height: 132px; resize: vertical; line-height: 1.5; }
+    input:focus, textarea:focus, select:focus { border-color: rgba(255,210,31,.65); box-shadow: 0 0 0 4px rgba(255,210,31,.08); }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+
+    .mini-card {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.035);
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .mini-card strong { color: var(--yellow); display: block; margin-bottom: 7px; }
+    .mini-card p { color: var(--muted); margin: 0; font-size: 14px; line-height: 1.5; }
+
+    .actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 20px;
+      cursor: pointer;
+      font-weight: 900;
+      letter-spacing: -.01em;
+      color: #06101f;
+      background: var(--yellow);
+      box-shadow: 0 10px 30px rgba(255,210,31,.18);
+      transition: transform .14s ease, opacity .14s ease;
+    }
+    button:hover { transform: translateY(-1px); }
+    button.secondary { background: rgba(255,255,255,.09); color: var(--text); box-shadow: none; border: 1px solid var(--border); }
+    button.blue { background: var(--blue); }
+    button.green { background: var(--green); }
+    button.orange { background: var(--orange); }
+    button.red { background: var(--red); color: white; }
+    button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    .output-card { margin-top: 22px; padding: 24px; display: none; }
+    .output-card.active { display: block; }
+    .output-toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: #02060d;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      color: #eef4ff;
+      line-height: 1.55;
+      max-height: 620px;
+      overflow: auto;
+      font-size: 14px;
+    }
+
+    .callout {
+      border-left: 5px solid var(--yellow);
+      background: rgba(255,210,31,.08);
+      padding: 14px 16px;
+      border-radius: 14px;
+      color: #fff7c2;
+      line-height: 1.5;
+      margin: 18px 0;
+    }
+
+    .footer-note { color: var(--muted); text-align: center; margin-top: 28px; font-size: 13px; }
+
+    @media (max-width: 860px) {
+      header { grid-template-columns: 1fr; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .hero, .page, .progress-card { padding: 20px; }
+      .actions { flex-direction: column; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <section class="hero">
+        <div class="eyebrow">Prompt PsyOps™ Portal</div>
+        <h1>Value-Add Content <span class="accent">Proof Portal™</span></h1>
+        <p>Walk through your topic, experience, data, research, and insight. At the end, this portal builds a clean AI LLM meta prompt you can paste into ChatGPT, Gemini, Claude, or Grok to create a post, article, or video script backed by real proof.</p>
+      </section>
+      <aside class="progress-card">
+        <h2>Portal Progress</h2>
+        <div class="meter"><div class="bar" id="bar"></div></div>
+        <div id="progressText">Step 1 of 8</div>
+        <div class="step-list" id="stepList"></div>
+      </aside>
+    </header>
+
+    <main class="portal">
+      <section class="page active" data-title="Start">
+        <h2>Start With The Big Idea</h2>
+        <p class="lead">This portal is designed to stop generic AI content before it starts. You are going to feed the AI your topic, your proof, your observations, and the content format you want.</p>
+        <label for="topic">Content Topic</label>
+        <input id="topic" placeholder="Example: Why the TOP Strategy works even when your views are low" />
+        <label for="contentAngle">Main Angle</label>
+        <textarea id="contentAngle" placeholder="Example: Most beginners chase more views, but my YouTube and affiliate data shows the right traffic matters more than big traffic."></textarea>
+        <label for="audience">Target Audience</label>
+        <input id="audience" placeholder="Example: Affiliate marketers, PLR buyers, digital creators, YouTubers, side hustlers" />
+        <div class="actions"><button class="secondary" onclick="resetPortal()">Reset Portal</button><button onclick="nextPage()">Next Step →</button></div>
+      </section>
+
+      <section class="page" data-title="Common Advice">
+        <h2>What Everyone Already Says</h2>
+        <p class="lead">Capture the generic advice, common belief, or surface-level talking point. This gives the AI something to move beyond.</p>
+        <label for="commonAdvice">Common Advice Or Belief</label>
+        <textarea id="commonAdvice" placeholder="Example: Most affiliate marketing advice tells beginners to get more views, post more content, find better products, or chase viral videos."></textarea>
+        <label for="wrongAssumption">What Is The Flawed Assumption?</label>
+        <textarea id="wrongAssumption" placeholder="Example: The flawed assumption is that more traffic automatically equals more sales."></textarea>
+        <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
+      </section>
+
+      <section class="page" data-title="Your Experience">
+        <h2>Add Your Experience Layer</h2>
+        <p class="lead">This is where your content becomes hard to copy. Add what you have personally seen, tested, learned, or noticed.</p>
+        <label for="experience">Personal Experience / Observations</label>
+        <textarea id="experience" placeholder="Example: Over the years, I have seen low-view videos generate real sales when the topic and offer are tightly aligned."></textarea>
+        <label for="pattern">Pattern You Have Noticed</label>
+        <textarea id="pattern" placeholder="Example: Traffic creates data. Data creates clarity. Clarity helps match the right offer to the right people."></textarea>
+        <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
+      </section>
+
+      <section class="page" data-title="Your Data">
+        <h2>Enter Your Proof Data</h2>
+        <p class="lead">Use your own numbers. These can come from YouTube, email, affiliate dashboards, sales pages, opt-in pages, Skool, analytics, surveys, or customer feedback.</p>
+        <div class="grid-3">
+          <div><label for="views">Views / Reach</label><input id="views" placeholder="79 views" /></div>
+          <div><label for="ctr">CTR</label><input id="ctr" placeholder="2.3%" /></div>
+          <div><label for="avgView">Avg. View Duration</label><input id="avgView" placeholder="3:49" /></div>
+        </div>
+        <div class="grid-3">
+          <div><label for="clicks">Clicks / Hops</label><input id="clicks" placeholder="20 unique hops" /></div>
+          <div><label for="sales">Sales / Conversions</label><input id="sales" placeholder="8 sales" /></div>
+          <div><label for="earnings">Earnings</label><input id="earnings" placeholder="$218.43" /></div>
+        </div>
+        <label for="extraData">Other Useful Data</label>
+        <textarea id="extraData" placeholder="Example: Published May 20, 2026. First 5 days and 2 hours. Ranked 8 of 10 by views. 40% hop conversion. $10.92 per hop."></textarea>
+        <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
+      </section>
+
+      <section class="page" data-title="Research">
+        <h2>Add Outside Research Or Proof</h2>
+        <p class="lead">This step is optional but powerful. Add credible research, market data, case studies, platform data, surveys, or outside examples. If you do not have outside research yet, tell the AI to suggest what kind of research would strengthen the piece.</p>
+        <label for="research">Research / Outside Evidence</label>
+        <textarea id="research" placeholder="Example: Add any studies, surveys, industry stats, platform documentation, case studies, or third-party examples that support the point."></textarea>
+        <label for="researchNeeded">Research You Want The AI To Help Find Or Suggest</label>
+        <textarea id="researchNeeded" placeholder="Example: Find supporting ideas about qualified traffic, buyer intent, YouTube evergreen discovery, or why conversion quality matters more than vanity metrics."></textarea>
+        <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
+      </section>
+
+      <section class="page" data-title="Insight">
+        <h2>Define The Value-Add Insight</h2>
+        <p class="lead">This is the contribution. Not just what the data says, but what it means.</p>
+        <label for="insight">Main Insight</label>
+        <textarea id="insight" placeholder="Example: Most beginners think their problem is not enough traffic, but often the real issue is not attracting qualified traffic that matches the offer."></textarea>
+        <label for="topConnection">How This Connects To The TOP Strategy</label>
+        <textarea id="topConnection" placeholder="Example: Traffic created the opportunity. The offer converted the opportunity. Buyers and subscribers become part of the People layer."></textarea>
+        <label for="nextStep">Practical Next Step For The Reader</label>
+        <textarea id="nextStep" placeholder="Example: Stop asking how to go viral and start asking whether your content attracts the people most likely to care about the offer."></textarea>
+        <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
+      </section>
+
+      <section class="page" data-title="Output Format">
+        <h2>Choose The Content Output</h2>
+        <p class="lead">Tell the AI exactly what to create from your proof. You can generate a social post, article, video script, email, lesson, or case study.</p>
+        <div class="grid-2">
+          <div>
+            <label for="format">Content Format</label>
+            <select id="format">
+              <option>Social media post</option>
+              <option>Long-form article</option>
+              <option>YouTube video script</option>
+              <option>Email to my list</option>
+              <option>Community lesson</option>
+              <option>Case study</option>
+            </select>
+          </div>
+          <div>
+            <label for="tone">Tone / Voice</label>
+            <select id="tone">
+              <option>Grounded, direct, practical, no hype</option>
+              <option>Conversational and educational</option>
+              <option>Direct response and persuasive</option>
+              <option>Contrarian and thought-leadership driven</option>
+              <option>Beginner-friendly but not insulting</option>
+            </select>
+          </div>
+        </div>
+        <label for="voiceNotes">Voice Notes / Brand Rules</label>
+        <textarea id="voiceNotes" placeholder="Example: Use the TOP Strategy. Keep it grounded. Avoid hype. Speak to beginners without insulting professionals. Make it feel like a real observation, not a generic AI article."></textarea>
+        <div class="actions"><button class="secondary" onclick="prevPage()">← Back</button><button onclick="nextPage()">Next Step →</button></div>
+      </section>
+
+      <section class="page" data-title="Generate Prompt">
+        <h2>Generate Your AI LLM Meta Prompt</h2>
+        <p class="lead">Click the button below to create a complete meta prompt. Paste it into ChatGPT, Gemini, Claude, or Grok. You can also copy, download, or reset the portal.</p>
+        <div class="callout"><strong>Final check:</strong> The goal is not to create more content. The goal is to create content that contains proof, experience, research, and insight someone could not get from AI alone.</div>
+        <div class="grid-3">
+          <div class="mini-card"><strong>1. Proof</strong><p>Your numbers show what happened.</p></div>
+          <div class="mini-card"><strong>2. Experience</strong><p>Your observations explain why it matters.</p></div>
+          <div class="mini-card"><strong>3. Insight</strong><p>Your conclusion creates the value-add.</p></div>
+        </div>
+        <div class="actions">
+          <button class="secondary" onclick="prevPage()">← Back</button>
+          <button class="green" onclick="generatePrompt()">Generate Meta Prompt</button>
+          <button class="red" onclick="resetPortal()">Reset Portal</button>
+        </div>
+      </section>
+    </main>
+
+    <section class="output-card" id="outputCard">
+      <h2>Your AI LLM Meta Prompt</h2>
+      <p class="lead">Paste this into ChatGPT, Gemini, Claude, or Grok to create the finished content piece.</p>
+      <div class="output-toolbar">
+        <button onclick="copyPrompt()">Copy Prompt</button>
+        <button class="blue" onclick="downloadPrompt()">Download .txt</button>
+        <button class="orange" onclick="scrollToTop()">Back To Top</button>
+      </div>
+      <pre id="promptOutput"></pre>
+    </section>
+
+    <p class="footer-note">Value-Add Content Proof Portal™ — built for creating content that combines data, experience, research, and original insight.</p>
+  </div>
+
+  <script>
+    const pages = Array.from(document.querySelectorAll('.page'));
+    const stepList = document.getElementById('stepList');
+    const bar = document.getElementById('bar');
+    const progressText = document.getElementById('progressText');
+    let current = 0;
+
+    function initSteps() {
+      stepList.innerHTML = pages.map((p, i) => `
+        <div class="step-chip" id="chip-${i}"><span class="dot"></span><span>${i + 1}. ${p.dataset.title}</span></div>
+      `).join('');
+      updateUI();
+      restoreData();
+      document.querySelectorAll('input, textarea, select').forEach(el => el.addEventListener('input', saveData));
+    }
+
+    function updateUI() {
+      pages.forEach((p, i) => p.classList.toggle('active', i === current));
+      document.querySelectorAll('.step-chip').forEach((chip, i) => {
+        chip.classList.toggle('active', i === current);
+        chip.classList.toggle('done', i < current);
+      });
+      const pct = ((current + 1) / pages.length) * 100;
+      bar.style.width = pct + '%';
+      progressText.textContent = `Step ${current + 1} of ${pages.length}`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextPage() { if (current < pages.length - 1) { current++; updateUI(); } }
+    function prevPage() { if (current > 0) { current--; updateUI(); } }
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    function field(id) { return document.getElementById(id)?.value.trim() || ''; }
+
+    function collectData() {
+      return {
+        topic: field('topic'), contentAngle: field('contentAngle'), audience: field('audience'),
+        commonAdvice: field('commonAdvice'), wrongAssumption: field('wrongAssumption'),
+        experience: field('experience'), pattern: field('pattern'),
+        views: field('views'), ctr: field('ctr'), avgView: field('avgView'), clicks: field('clicks'), sales: field('sales'), earnings: field('earnings'), extraData: field('extraData'),
+        research: field('research'), researchNeeded: field('researchNeeded'),
+        insight: field('insight'), topConnection: field('topConnection'), nextStep: field('nextStep'),
+        format: field('format'), tone: field('tone'), voiceNotes: field('voiceNotes')
+      };
+    }
+
+    function generatePrompt() {
+      const d = collectData();
+      const prompt = `You are a senior content strategist, direct response copywriter, and evidence-based editorial assistant.
+
+Your job is to create a value-add content piece that combines personal experience, real data, outside research, and original insight.
+
+Do not create generic AI content.
+Do not simply summarize common advice.
+Do not overstate the proof.
+Do not make income promises or imply guaranteed results.
+Use the data honestly and explain what it suggests, not what it guarantees.
+
+CONTENT FORMAT TO CREATE:
+${d.format || '[Choose a content format]'}
+
+TONE / VOICE:
+${d.tone || '[Describe the tone]'}
+
+VOICE NOTES / BRAND RULES:
+${d.voiceNotes || '[Add brand rules or voice notes]'}
+
+TOPIC:
+${d.topic || '[Insert topic]'}
+
+MAIN ANGLE:
+${d.contentAngle || '[Insert main angle]'}
+
+TARGET AUDIENCE:
+${d.audience || '[Insert target audience]'}
+
+WHAT EVERYONE ALREADY SAYS:
+${d.commonAdvice || '[Insert common advice]'}
+
+FLAWED ASSUMPTION TO CHALLENGE:
+${d.wrongAssumption || '[Insert flawed assumption]'}
+
+PERSONAL EXPERIENCE / OBSERVATIONS:
+${d.experience || '[Insert personal experience]'}
+
+PATTERN NOTICED:
+${d.pattern || '[Insert pattern noticed]'}
+
+MY DATA / PROOF POINTS:
+- Views / Reach: ${d.views || '[Insert views or reach]'}
+- CTR: ${d.ctr || '[Insert CTR if available]'}
+- Average View Duration: ${d.avgView || '[Insert average view duration if available]'}
+- Clicks / Hops: ${d.clicks || '[Insert clicks or hops]'}
+- Sales / Conversions: ${d.sales || '[Insert sales or conversions]'}
+- Earnings / Revenue: ${d.earnings || '[Insert earnings or revenue]'}
+- Other data: ${d.extraData || '[Insert any other useful data]'}
+
+OUTSIDE RESEARCH / SUPPORTING EVIDENCE:
+${d.research || '[Insert outside research if available]'}
+
+RESEARCH TO SUGGEST OR LOOK FOR:
+${d.researchNeeded || '[Suggest what outside research would strengthen this piece]'}
+
+MAIN VALUE-ADD INSIGHT:
+${d.insight || '[Insert your main insight]'}
+
+CONNECTION TO THE TOP STRATEGY:
+${d.topConnection || '[Explain how this connects to Traffic → Offer → People]'}
+
+PRACTICAL NEXT STEP FOR THE READER:
+${d.nextStep || '[Insert practical next step]'}
+
+STRUCTURE THE CONTENT LIKE THIS:
+
+1. Hook
+Open with a direct observation, surprising contrast, or data point.
+Make the reader want to keep reading.
+
+2. What Everyone Says
+Briefly explain the common advice or belief.
+
+3. What The Data Shows
+Use my provided data clearly and honestly.
+Show the contrast between surface-level metrics and business outcomes.
+
+4. What I Observed
+Bring in my personal experience and pattern recognition.
+This should sound lived-in, not academic.
+
+5. What This Means
+Explain the deeper lesson.
+Tie it to the TOP Strategy where appropriate: Traffic creates opportunity, Offer converts opportunity, People create long-term business value.
+
+6. The Insight Most People Miss
+State the value-add idea in a memorable way.
+
+7. What To Do Next
+Give the reader a practical next step.
+
+8. Final Takeaway
+End with a strong, grounded conclusion.
+
+IMPORTANT WRITING RULES:
+- Use clear sentences.
+- Avoid hype.
+- Avoid fake certainty.
+- Do not invent data.
+- Do not claim the same results will happen for everyone.
+- Make the piece feel like a real business observation backed by actual evidence.
+- If the data is limited, say that it is a small example but still useful as a pattern worth noticing.
+- Make this content valuable beyond what someone could get from asking AI for a generic answer.
+
+Now create the finished ${d.format || 'content piece'}.`;
+
+      document.getElementById('promptOutput').textContent = prompt;
+      document.getElementById('outputCard').classList.add('active');
+      document.getElementById('outputCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      saveData();
+    }
+
+    async function copyPrompt() {
+      const text = document.getElementById('promptOutput').textContent;
+      if (!text) return alert('Generate the prompt first.');
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Prompt copied to clipboard.');
+      } catch (e) {
+        alert('Copy failed. Select the text and copy manually.');
+      }
+    }
+
+    function downloadPrompt() {
+      const text = document.getElementById('promptOutput').textContent;
+      if (!text) return alert('Generate the prompt first.');
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'value-add-content-meta-prompt.txt';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function saveData() {
+      const data = collectData();
+      localStorage.setItem('valueAddProofPortalData', JSON.stringify(data));
+    }
+
+    function restoreData() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('valueAddProofPortalData') || '{}');
+        Object.keys(saved).forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = saved[id];
+        });
+      } catch (e) {}
+    }
+
+    function resetPortal() {
+      if (!confirm('Reset all portal progress and clear your inputs?')) return;
+      localStorage.removeItem('valueAddProofPortalData');
+      document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+      document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+      document.getElementById('promptOutput').textContent = '';
+      document.getElementById('outputCard').classList.remove('active');
+      current = 0;
+      updateUI();
+    }
+
+    initSteps();
+  </script>
+</body>
+</html>
